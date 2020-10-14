@@ -1,13 +1,15 @@
 package poly.pro2112.security.jwt;
 
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
-import poly.pro2112.security.services.AdminUserService;
+import poly.pro2112.security.services.UserService;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -17,14 +19,18 @@ import java.io.IOException;
 
 @Slf4j
 public class JwtAuthenticationFilterForAdmin extends OncePerRequestFilter {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     JwtTokenProvider tokenProvider;
 
     @Autowired
-    AdminUserService adminSv;
+    UserService userService;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain)
+            throws ServletException, IOException {
         try {
             // Lay Jwt tu Request
             String jwt = getJwtFromRequest(httpServletRequest);
@@ -34,7 +40,7 @@ public class JwtAuthenticationFilterForAdmin extends OncePerRequestFilter {
 //                Integer id = tokenProvider.getUserIdFromJWT(jwt);
                 // Lay thong tin cuar
 //                UserDetails userDetails = adminSv.loadUserById(id);
-                UserDetails userDetails =adminSv.loadUserByUsername(tokenProvider.getUsernameFromJWT(jwt));
+                UserDetails userDetails =userService.loadUserByUsername(tokenProvider.getUsernameFromJWT(jwt));
                 if (userDetails != null) {
                     UsernamePasswordAuthenticationToken
                             authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());

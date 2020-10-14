@@ -5,23 +5,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import poly.pro2112.entities.Administrator;
-import poly.pro2112.repository.AdministratorRepository;
+import poly.pro2112.entities.Nguoidung;
+import poly.pro2112.repository.NguoidungRepository;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserService implements UserDetailsService {
     @Autowired
-    AdministratorRepository administratorRepository;
-
+    NguoidungRepository nguoidungRepository;
     @Override
-    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Administrator user = administratorRepository.findByUsername(username)
+        Nguoidung nguoidung = nguoidungRepository.findNguoidungByTaikhoan(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
 
-        return UserDetailsImpl.build(user);
+        return UserDetailsImpl.build(nguoidung);
     }
-
 }

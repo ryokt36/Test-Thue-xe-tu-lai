@@ -1,44 +1,41 @@
 package poly.pro2112.security.services;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import poly.pro2112.entities.Administrator;
+import poly.pro2112.entities.Nguoidung;
 
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
     private Integer id;
-
     private String username;
-
-//    private String email;
-
+    private String email;
     @JsonIgnore
     private String password;
-
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(Integer id, String username, String password,
+    public UserDetailsImpl(Integer id, String username, String email, String password,
                            Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
+        this.email = email;
         this.password = password;
         this.authorities = authorities;
     }
 
-    public static UserDetailsImpl build(Administrator administrator) {
-        Set<SimpleGrantedAuthority> authorities =  Collections.singleton(new SimpleGrantedAuthority(administrator.getRole()));
+    public static UserDetailsImpl build(Nguoidung nguoidung) {
+        Set<SimpleGrantedAuthority> authorities =  Collections.singleton(new SimpleGrantedAuthority(nguoidung.getChucvu()));
 
         return new UserDetailsImpl(
-                administrator.getId(),
-                administrator.getUsername(),
-                administrator.getPassword(),
+                nguoidung.getId(),
+                nguoidung.getTaikhoan(),
+                nguoidung.getEmail(),
+                nguoidung.getMatkhau(),
                 authorities);
     }
 
@@ -49,6 +46,10 @@ public class UserDetailsImpl implements UserDetails {
 
     public Integer getId() {
         return id;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     @Override
