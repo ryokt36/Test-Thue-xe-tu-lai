@@ -51,6 +51,7 @@ public class NguoidungController extends ExceptionHandlers {
             throw new AlreadyUsedException("Email", null);
         }
         else {
+            nguoidung.setChucvu("S");
             nguoidung.setMatkhau(passwordEncoder.encode(nguoidung.getMatkhau()));
             return nguoidungRepository.save(nguoidung);
         }
