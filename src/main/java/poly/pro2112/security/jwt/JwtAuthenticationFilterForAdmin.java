@@ -35,6 +35,8 @@ public class JwtAuthenticationFilterForAdmin extends OncePerRequestFilter {
             // Lay Jwt tu Request
             String jwt = getJwtFromRequest(httpServletRequest);
 
+            logger.debug(jwt);
+
             if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
                 // Lay id cua chuoi Jwt
 //                Integer id = tokenProvider.getUserIdFromJWT(jwt);

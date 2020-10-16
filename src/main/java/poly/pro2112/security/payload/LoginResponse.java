@@ -12,7 +12,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LoginResponse implements Serializable {
-    private static final long serialVersionUID = -5616176897013108345L;
+    private static final long serialVersionUID = -2311550666678479916L;
     private String accessToken;
     private String tokenType = "Bearer ";
     private String username;

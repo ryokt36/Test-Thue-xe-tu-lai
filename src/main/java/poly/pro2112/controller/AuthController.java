@@ -34,6 +34,7 @@ public class AuthController {
 
     @Autowired
     NguoidungRepository nguoidungRepository;
+
     @Autowired
     private JwtTokenProvider tokenProvider;
 
@@ -42,14 +43,12 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest login) throws AuthenticationException {
-//        authenticate(login.getUsername(), login.getPassword());
         System.out.println(login.getUsername());
         System.out.println(passwordEncoder.encode(login.getPassword()));
+
         // Xác thực từ username và password.
-//        Authentication authentication = authenticationManager.authenticate(
-//                new UsernamePasswordAuthenticationToken(login.getUsername(),login.getPassword())
-//        );
         Authentication authentication = authenticate(login.getUsername(), login.getPassword());
+
         // Nếu không xảy ra exception tức là thông tin hợp lệ
         // Set thông tin authentication vào Security Context
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -87,6 +86,7 @@ public class AuthController {
                 signUpRequest.getEmail());
 
         nguoidung.setChucvu(signUpRequest.getChucvu());
+        nguoidung.setGioitinh(signUpRequest.getGioitinh());
         Nguoidung check = nguoidungRepository.save(nguoidung);
         if(check != null){
             Authentication authentication = authenticate(signUpRequest.getTaikhoan(), signUpRequest.getMatkhau());

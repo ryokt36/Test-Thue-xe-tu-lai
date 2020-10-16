@@ -6,8 +6,9 @@ import java.io.Serializable;
 
 @Data
 public class SignupRequest implements Serializable {
-    private static final long serialVersionUID = -5616176897013108345L;
+    private static final long serialVersionUID = 5802837029870546902L;
     private String hoten;
+    private String gioitinh;
     private String taikhoan;
     private String matkhau;
     private String email;

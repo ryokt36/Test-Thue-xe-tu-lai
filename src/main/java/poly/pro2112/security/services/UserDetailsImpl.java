@@ -10,8 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import poly.pro2112.entities.Nguoidung;
 
 public class UserDetailsImpl implements UserDetails {
-    private static final long serialVersionUID = 1L;
-
+    private static final long serialVersionUID = 7734862883027291996L;
     private Integer id;
     private String username;
     private String email;

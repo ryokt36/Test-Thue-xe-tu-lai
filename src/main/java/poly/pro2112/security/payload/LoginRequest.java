@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 @Data
 public class LoginRequest implements Serializable {
-    private static final long serialVersionUID = -5616176897013108345L;
+    private static final long serialVersionUID = -7631778035091507280L;
     private String username;
     private String password;
 }

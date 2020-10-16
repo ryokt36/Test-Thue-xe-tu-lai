@@ -5,19 +5,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Nguoidung {
+public class Nguoidung implements Serializable {
+    private static final long serialVersionUID = -7036233769307294365L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String taikhoan;
     private String matkhau;
     private String hoten;
+    private String gioitinh;
     private String hokhau;
     private String anhdaidien;
     private String sdt;
