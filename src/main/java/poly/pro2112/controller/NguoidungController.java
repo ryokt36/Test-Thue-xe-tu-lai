@@ -1,6 +1,7 @@
 package poly.pro2112.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import poly.pro2112.controller.handlers.ExceptionHandlers;
 import poly.pro2112.entities.Nguoidung;
@@ -17,6 +18,9 @@ public class NguoidungController extends ExceptionHandlers {
 
     @Autowired
     NguoidungRepository nguoidungRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @GetMapping("/admin/nguoidung")
     public List<Nguoidung> getAllNguoidungByAdmin(){
@@ -47,6 +51,7 @@ public class NguoidungController extends ExceptionHandlers {
             throw new AlreadyUsedException("Email", null);
         }
         else {
+            nguoidung.setMatkhau(passwordEncoder.encode(nguoidung.getMatkhau()));
             return nguoidungRepository.save(nguoidung);
         }
     }
@@ -63,6 +68,7 @@ public class NguoidungController extends ExceptionHandlers {
             throw new AlreadyUsedException("Email", null);
         }
         else {
+            nguoidung.setMatkhau(passwordEncoder.encode(nguoidung.getMatkhau()));
             return nguoidungRepository.save(nguoidung);
         }
     }
@@ -79,6 +85,7 @@ public class NguoidungController extends ExceptionHandlers {
             throw new AlreadyUsedException("Email", null);
         }
         else {
+            nguoidung.setMatkhau(passwordEncoder.encode(nguoidung.getMatkhau()));
             nguoidung.setIsdelete(true);
             return nguoidungRepository.save(nguoidung);
         }
