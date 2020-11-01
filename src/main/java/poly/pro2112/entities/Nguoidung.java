@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -37,4 +39,8 @@ public class Nguoidung implements Serializable {
         this.matkhau = password;
         this.email = email;
     }
+
+    // lien ket
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nguoidung")
+    private List<Hoadon> hoadons = new ArrayList<>();
 }

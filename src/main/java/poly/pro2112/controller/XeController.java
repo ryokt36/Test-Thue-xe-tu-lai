@@ -17,13 +17,13 @@ import java.util.Optional;
 @RestController
 public class XeController {
     @Autowired
-    XeService xeService;
+    private XeService xeService;
 
     @Autowired
-    XeRepository xeRepository;
+    private XeRepository xeRepository;
 
     @Autowired
-    MauxeRepository mauxeRepository;
+    private MauxeRepository mauxeRepository;
 
     @GetMapping("/xe")
     public List<XeVO> getAllXe(){

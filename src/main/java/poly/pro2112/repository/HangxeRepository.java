@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface HangxeRepository extends JpaRepository<Hangxe, Integer> {
     Boolean existsHangxeByTenhang(String tenhang);
+
 }

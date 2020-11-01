@@ -45,4 +45,11 @@ public class Xe implements Serializable{
     )
     private List<Tinhnang> tinhnangs = new ArrayList<>();
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "hoadonchitiet",
+            joinColumns = @JoinColumn(name = "id_xe"),
+            inverseJoinColumns = @JoinColumn(name = "id_hoadon")
+    )
+    private List<Hoadon> hoadons = new ArrayList<>();
+
 }

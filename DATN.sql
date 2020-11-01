@@ -144,7 +144,7 @@ create table HOADONCHITIET
   ngaybatdau	date not null,
   ngayketthuc	date not null,
   tongtien		float not null,
-  ghichu		nvarchar null,
+  ghichu		nvarchar(300) null,
   isDelete		bit null,
   constraint PK_HOADONCHITIET primary key (id_hoadon, id_xe),
   constraint FK_HOADON_HOADONCHITIET foreign key (id_hoadon) references HOADON,
@@ -232,6 +232,12 @@ Select * from MAUXE
 Select * from HANGXE
 Select * from TINHNANG
 Select * from TINHNANGXE
+Select * from HOADON
+Select * from HOADONCHITIET
+
+
+Delete from HOADON
+Delete from HOADONCHITIET
 
 ---Drop all
 drop table HOADONCHITIET
@@ -244,3 +250,4 @@ drop table HANGXE
 drop table TINHNANG 
 drop table NGUOIDUNG 
 drop table CANCUOCCONGDAN 
+
